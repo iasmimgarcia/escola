@@ -1,17 +1,16 @@
 package br.edu.ifmg.escola.enities;
 
 import br.edu.ifmg.escola.enities.pk.EnrollmentPk;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,6 +30,9 @@ public class Enrollment {
 
     @ManyToMany(mappedBy = "enrollmentsDone")
     private Set<Lesson> lessonsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public User getUser() { return id.getUser();}
 
